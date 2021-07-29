@@ -7,6 +7,18 @@
 
 Video player based on [ffplay](http://ffmpeg.org)
 
+### 当前主要是针对安卓，ios直接调用C即可
+  
+  使用的时候需要在 ijkplayer-java 中增加一个native方法 
+  
+  //加上此方法是为了解决在录制时前面会出现一段黑屏情况
+  //使用方法为：
+     先调用public native int startRecord(String var1);方法
+     在调用下面的方法，当返回值为1的时候，代表已经获取到关键帧，此视开始录制，这样就可以避免黑屏情况。
+     public native int startingRecord(); 
+  
+  
+
 ### Download
 
 - Android:
