@@ -34,7 +34,7 @@ Video player based on [ffplay](http://ffmpeg.org)
 
 - 编译ffmpeg
 - brew install yasm
-- export ANDROID_NDK=/Users/mac/android-ndk-r10e 
+- export ANDROID_NDK=ndk路径
 
 - cd到android/contrib下，执行清除命令，然后编译需要的so，这里的all是生成所有版本的，如果只需要对应版本的，可以把all替换成armv7a等你需要的版本。编译需要很长时间
 - cd android/contrib
