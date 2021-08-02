@@ -17,29 +17,35 @@ Video player based on [ffplay](http://ffmpeg.org)
      在调用下面的方法，当返回值为1的时候，代表已经获取到关键帧，此视开始录制，这样就可以避免黑屏情况。
      public native int startingRecord(); 
   
-  so库编译步骤：
+  ### so库编译步骤(使用mac系统)：
 
-git clone https://github.com/Bilibili/ijkplayer.git ijkplayer-android
-cd ijkplayer-android
-git checkout -B latest k0.8.8
- cd config rm module.sh ln -s module-lite.sh module.sh
+### git clone https://github.com/Bilibili/ijkplayer.git ijkplayer-android
+- cd ijkplayer-android
+ - git checkout -B latest k0.8.8
+ - cd config
+ - rm module.sh
+ - ln -s module-lite.sh module.sh
 
-增加录制方法
-
-Cd..
-初始化FFMPEG ./init-android.sh 这个是下载FFMPEG的源码，下载过程会很慢。下载过程中extra\ffmpeg文件夹的内容会变化
-
-
-编译ffmpeg
-brew install yasm
-export ANDROID_NDK=/Users/mac/android-ndk-r10e 
- cd到android/contrib下，执行清除命令，然后编译需要的so，这里的all是生成所有版本的，如果只需要对应版本的，可以把all替换成armv7a等你需要的版本。编译需要很长时间 cd android/contrib ./compile-ffmpeg.sh clean ./compile-ffmpeg.sh all
+- cd..
+- 初始化FFMPEG
+- ./init-android.sh
+- 这个是下载FFMPEG的源码，下载过程会很慢。下载过程中extra\ffmpeg文件夹的内容会变化
 
 
+- 编译ffmpeg
+- brew install yasm
+- export ANDROID_NDK=/Users/mac/android-ndk-r10e 
 
-Cd编译ijkplayer生成对应so
-cd ..
-./compile-ijk.sh all
+- cd到android/contrib下，执行清除命令，然后编译需要的so，这里的all是生成所有版本的，如果只需要对应版本的，可以把all替换成armv7a等你需要的版本。编译需要很长时间
+- cd android/contrib
+- ./compile-ffmpeg.sh clean
+- ./compile-ffmpeg.sh all
+
+
+
+- Cd编译ijkplayer生成对应so
+- cd ..
+- ./compile-ijk.sh all
 
 ### Download
 
