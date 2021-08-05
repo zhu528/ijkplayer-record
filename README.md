@@ -7,6 +7,46 @@
 
 Video player based on [ffplay](http://ffmpeg.org)
 
+### 当前主要是针对安卓，ios直接调用C即可
+  
+  使用的时候需要在 ijkplayer-java 中增加一个native方法 
+  
+  //加上此方法是为了解决在录制时前面会出现一段黑屏情况
+  //使用方法为：
+     先调用public native int startRecord(String var1);方法
+     在调用下面的方法，当返回值为1的时候，代表已经获取到关键帧，此视开始录制，这样就可以避免黑屏情况。
+     public native int startingRecord(); 
+  
+  ### so库编译步骤(使用mac系统)：
+
+### git clone https://github.com/Bilibili/ijkplayer.git ijkplayer-android
+- cd ijkplayer-android
+ - git checkout -B latest k0.8.8
+ - cd config
+ - rm module.sh
+ - ln -s module-lite.sh module.sh
+
+- cd..
+- 初始化FFMPEG
+- ./init-android.sh
+- 这个是下载FFMPEG的源码，下载过程会很慢。下载过程中extra\ffmpeg文件夹的内容会变化
+
+
+- 编译ffmpeg
+- brew install yasm
+- export ANDROID_NDK=ndk路径
+
+- cd到android/contrib下，执行清除命令，然后编译需要的so，这里的all是生成所有版本的，如果只需要对应版本的，可以把all替换成armv7a等你需要的版本。编译需要很长时间
+- cd android/contrib
+- ./compile-ffmpeg.sh clean
+- ./compile-ffmpeg.sh all
+
+
+
+- Cd编译ijkplayer生成对应so
+- cd ..
+- ./compile-ijk.sh all
+
 ### Download
 
 - Android:
