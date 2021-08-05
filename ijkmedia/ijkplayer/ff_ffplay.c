@@ -5217,7 +5217,8 @@ int ffp_record_file(FFPlayer *ffp, AVPacket *packet)
                 }
                 AVPacket *pkt = (AVPacket *)av_malloc(sizeof(AVPacket)); // 与看直播的 AVPacket分开，不然卡屏
                 av_new_packet(pkt, 0);
-               if (0 == av_packet_ref(pkt, packet)) {
+                //解决缓存为null导致崩溃的问题
+                if (packet->buf->size > 2 &&0 == av_packet_ref(pkt, packet)) {
                     pthread_mutex_lock(&ffp->record_mutex);
                      //录制的第一帧，时间从0开始
                    if (!ffp->is_first) {
@@ -5262,7 +5263,8 @@ int ffp_record_file(FFPlayer *ffp, AVPacket *packet)
                     //pkt->pos = -1;
                     av_log(ffp, AV_LOG_ERROR, "last duration: %lld",pkt->duration);
                     // 写入一个AVPacket到输出文件,如果遇到报错的帧，那么直接跳过ret赋值0，跳过该帧
-                    if ((ret = av_interleaved_write_frame(ffp->m_ofmt_ctx, pkt))< 0) {
+                    //解决in_stream为空时写入空packet导致Error muxing packet错误的问题；
+                    if (in_stream &&(ret = av_interleaved_write_frame(ffp->m_ofmt_ctx, pkt))< 0) {
                         av_log(ffp, AV_LOG_ERROR, "Error muxing packet %d",ret);
                         ret = 0;
                     }
