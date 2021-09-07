@@ -5301,15 +5301,15 @@ int ffp_stop_record(FFPlayer *ffp)
     return 0;
 }
 //预停止
-int ffp_prestop_l(FFPlayer *ffp)
-{
-    assert(ffp);
-    VideoState *is = ffp->is;
-    av_log(ffp, AV_LOG_ERROR, "ffp_prestop_l_1");
-    if (is){
-        av_log(ffp, AV_LOG_ERROR, "ffp_prestop_l");
-//        avformat_preclose_input(&is->ic);
-    }
-    return 0;
-}
+//int ffp_prestop_l(FFPlayer *ffp)
+//{
+//    assert(ffp);
+//    VideoState *is = ffp->is;
+//    av_log(ffp, AV_LOG_ERROR, "ffp_prestop_l_1");
+//    if (is){
+//        av_log(ffp, AV_LOG_ERROR, "ffp_prestop_l");
+////        avformat_preclose_input(&is->ic);
+//    }
+//    return 0;
+//}
 
